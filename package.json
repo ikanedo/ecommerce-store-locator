@@ -1,8 +1,7 @@
 {
-  "name": "react-component-boilerplate",
-  "description": "Boilerplate for React.js components",
-  "author": "Juho Vepsalainen",
-  "user": "survivejs",
+  "name": "ecommerce-store-locator",
+  "description": "Ecommerce store locator",
+  "author": "Kane Balagtey",
   "version": "5.0.1",
   "scripts": {
     "start": "webpack-dev-server --env dev",
@@ -73,11 +72,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/survivejs/react-component-boilerplate.git"
+    "url": "https://github.com/ikanedo/ecommerce-store-locator.git"
   },
-  "homepage": "https://survivejs.github.io/react-component-boilerplate/",
+  "homepage": "https://github.com/ikanedo/ecommerce-store-locator",
   "bugs": {
-    "url": "https://github.com/survivejs/react-component-boilerplate/issues"
+    "url": "https://github.com/ikanedo/ecommerce-store-locator/issues"
   },
   "jest": {
     "collectCoverage": true,
