@@ -5,11 +5,9 @@ import GithubCorner from 'react-github-corner';
 import { Catalog, CodeSpecimen, ReactSpecimen } from 'catalog';
 
 import 'purecss/build/pure.css';
-import { demo } from '../src/index';
 import './main.css';
 import '../style.css';
 
-demo();
 
 // Add your documentation imports here. These are available to
 // React specimen. Do NOT pass React here as Catalog does that.

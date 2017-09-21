@@ -21,20 +21,29 @@ const store = createStore(
 export default class StoreLocator extends Component {
   constructor() {
     super();
-
     this.state = {
       isGoogleApiLoaded: false
     };
   }
-  // AIzaSyDXQGYImJCR92JddhQgDopRcdl252_QhkI
+
+
   componentWillMount() {
+    // AIzaSyCVkF6QYNct5MP7vLiQMb4Ug7-se9_OpHc
     loadGoogleMapsAPI({
-      key: 'AIzaSyCVkF6QYNct5MP7vLiQMb4Ug7-se9_OpHc'
+      key: 'AIzaSyA3ffj9TQGBB-vWlDL7shEe5cS7qa9NJ84'
     }).then(() => {
       this.setState({
         isGoogleApiLoaded: true
       });
-      console.log(window.google);
+    });
+
+    store.dispatch({
+      type: 'SET_COLLECTION_CONFIG',
+      endpointUrl: '/gb/store-locator/stock',
+      endpointParams: {
+        countryCode: 'GB',
+        productCode: 'HH3269-257A100-A100'
+      }
     });
   }
 
@@ -45,7 +54,9 @@ export default class StoreLocator extends Component {
 
     return (
       <Provider store={ store }>
-        <CollectionApp name="Collection" />
+        <CollectionApp
+          name="Collection"
+        />
       </Provider>
     );
   }

@@ -3,7 +3,10 @@ import * as CONST from './collectionConstants';
 import mock from './mock2';
 
 const ajax = {
-  get() {
+  get(url, data) {
+    console.log(1, 'mock get request is fired!');
+    console.log(2, 'url called', url);
+    console.log(3, 'data sent', data);
     return Promise.resolve(mock);
   }
 };
@@ -44,10 +47,10 @@ export function setCollectionLocations(locations) {
   };
 }
 
-export function setCollectionFilters(postcodeObj) {
+export function setCollectionFilters(geolocation) {
   return {
     type: CONST.SET_COLLECTION_FILTERS,
-    ...postcodeObj
+    postcode: geolocation
   };
 }
 
@@ -58,10 +61,13 @@ export function setCollectionErrorMsg(errorMsg) {
   };
 }
 
-export function findCollectionPoint(postcodeObj) {
+export function findCollectionPoint(url, params, geolocation) {
   return dispatch => {
     dispatch(setCollectionLoading(true));
-    ajax.get(CONST.COLLECT_FIND_URL, postcodeObj)
+
+    ajax.get(url, Object.assign({
+      geolocation
+    }, params))
       .then(response => {
         if (isEmpty(response.stores)) {
           dispatch(resetCollectionState());
@@ -70,7 +76,7 @@ export function findCollectionPoint(postcodeObj) {
         }
 
         dispatch(setCollectionLocations(response.stores));
-        dispatch(setCollectionFilters(postcodeObj));
+        dispatch(setCollectionFilters(geolocation));
         return response;
       }, () => {
         dispatch(setCollectionLoading(false));

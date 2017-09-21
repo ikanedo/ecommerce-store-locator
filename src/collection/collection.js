@@ -20,14 +20,16 @@ export class Collection extends Component {
     this.handlePostcodeSearch = this.handlePostcodeSearch.bind(this);
   }
 
-  handlePostcodeSearch(data) {
+  handlePostcodeSearch(geolocation) {
     const {
       view,
       setCollectionView,
-      findCollectionPoint
+      findCollectionPoint,
+      endpointUrl,
+      endpointParams
     } = this.props;
     setCollectionView(view || CONST.LIST_VIEW);
-    findCollectionPoint(data);
+    findCollectionPoint(endpointUrl, endpointParams, geolocation);
   }
 
   render() {
@@ -92,6 +94,8 @@ export class Collection extends Component {
 }
 
 Collection.propTypes = {
+  endpointUrl: PropTypes.string,
+  endpointParams: PropTypes.object,
   view: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   locations: PropTypes.array.isRequired,

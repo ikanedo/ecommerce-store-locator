@@ -5,8 +5,8 @@ export const SET_COLLECTION_FILTERS = 'SET_COLLECTION_FILTERS';
 export const SET_ACTIVE_MAP_LOCATION = 'SET_ACTIVE_MAP_LOCATION';
 export const RESET_COLLECTION = 'RESET_COLLECTION';
 export const SET_COLLECTION_VIEW = 'SET_COLLECTION_VIEW';
+export const SET_COLLECTION_CONFIG = 'SET_COLLECTION_CONFIG';
 
 export const MAP_VIEW = 'MAP_VIEW';
 export const LIST_VIEW = 'LIST_VIEW';
 
-export const COLLECT_FIND_URL = '/api/v1/checkout/delivery/locations';

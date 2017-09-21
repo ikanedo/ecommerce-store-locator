@@ -1,6 +1,8 @@
 import * as CONST from './collectionConstants';
 
 const initialState = {
+  endpointUrl: '',
+  endpointParams: {},
   view: CONST.LIST_VIEW,
   errorMsg: undefined,
   locations: [],
@@ -17,6 +19,12 @@ const initialState = {
 
 export default function collection(state = initialState, action) {
   switch (action.type) {
+    case CONST.SET_COLLECTION_CONFIG:
+      return {
+        ...state,
+        endpointUrl: action.endpointUrl,
+        endpointParams: action.endpointParams
+      };
     case CONST.SET_COLLECTION_LOADING:
       return {
         ...state,
