@@ -28,6 +28,7 @@ module.exports = {
     "react/require-default-props": 0,
     "react/self-closing-comp": 0,
     "react/forbid-prop-types": 0,
-    "jsx-a11y/label-has-for": 0
+    "jsx-a11y/label-has-for": 0,
+    "no-debugger": 0
   }
 };

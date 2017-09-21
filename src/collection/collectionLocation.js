@@ -7,13 +7,17 @@ export default function CollectionLocation(props) {
     location,
     name,
     className,
-    deliveryModeCode,
     ...inputProps
   } = props;
 
   const {
-    address
+    addressLine1,
+    uid
   } = location;
+
+  if (uid === '') {
+    return null;
+  }
 
   return (
     <SelectablePanel
@@ -25,7 +29,7 @@ export default function CollectionLocation(props) {
       {...inputProps}
     >
       <div className="collection-panel">
-        <p className="collection-panel__address">{ address }</p>
+        <p className="collection-panel__address">{ addressLine1 }</p>
         <p>TODO - opening hours</p>
       </div>
     </SelectablePanel>
@@ -35,15 +39,13 @@ export default function CollectionLocation(props) {
 CollectionLocation.propTypes = {
   handleLocationClick: PropTypes.func.isRequired,
   location: PropTypes.shape({
-    type: PropTypes.string.isRequired,
+    uid: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    geoPoint: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired
+    addressLine1: PropTypes.string,
+    deliveryMode: PropTypes.shape({
+      leadTime: PropTypes.string.isRequired
     })
   }).isRequired,
   name: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  deliveryModeCode: PropTypes.string.isRequired
+  className: PropTypes.string
 };

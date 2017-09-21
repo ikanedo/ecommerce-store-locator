@@ -6,13 +6,11 @@ import GoogleMapMarkers from '../../googleMaps/googleMapMarkers';
 export class CollectionGoogleMapRenderer {
   constructor({ id, postcode, locations, activeMapLocation, handleMarkerClick }) {
     return utils.createResponsiveMap(id, postcode).then(map => {
-      const hasCurrectActiveLocation =
-        locations.some(location => location.id === activeMapLocation.id);
       this.map = map;
       this.markers = new GoogleMapMarkers(map, 12, 13);
       this.markers.setMarkers(
         locations,
-        hasCurrectActiveLocation ? activeMapLocation : locations[0],
+        activeMapLocation,
         handleMarkerClick
       );
       this.markers.setCurrentLocationMarker(postcode);
@@ -34,9 +32,9 @@ export default class CollectionGoogleMap extends Component {
       isVisible
     } = this.props;
     const hasChangedLocation =
-      (activeMapLocation.id !== nextProps.activeMapLocation.id);
+      (activeMapLocation.uid !== nextProps.activeMapLocation.uid);
     const isAlreadyInitialised =
-      this.locationsMap && nextProps.activeMapLocation.distance;
+      this.locationsMap && nextProps.activeMapLocation.uid;
     const hasSwitchedFromListToMap =
       isAlreadyInitialised && !isVisible && nextProps.isVisible;
 
@@ -97,7 +95,7 @@ export default class CollectionGoogleMap extends Component {
 CollectionGoogleMap.propTypes = {
   activeMapLocation: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    id: PropTypes.number,
+    uid: PropTypes.string,
     distance: PropTypes.number
   }),
   locations: PropTypes.array.isRequired,

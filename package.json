@@ -2,7 +2,7 @@
   "name": "ecommerce-store-locator",
   "description": "Ecommerce store locator",
   "author": "Kane Balagtey",
-  "version": "5.0.1",
+  "version": "1.0.1",
   "scripts": {
     "start": "webpack-dev-server --env dev",
     "test": "jest",

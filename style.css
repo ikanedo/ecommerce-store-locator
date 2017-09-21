@@ -8199,7 +8199,6 @@ screen and (min-width: 48em) {
 @media print,
 screen and (min-width: 48em) {
     .collection-filter__views {
-        border-left: 1px solid #d1d3d4;
         border-top-width: 0;
         margin: 0;
         padding: 0;

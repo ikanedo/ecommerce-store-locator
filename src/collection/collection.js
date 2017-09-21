@@ -74,7 +74,6 @@ export class Collection extends Component {
                 name="selected-collection"
                 className="collection-map__active-location"
                 location={ activeMapLocation }
-                deliveryModeCode={ activeMapLocation.type }
                 handleLocationClick={ setActiveMapLocation }
               />
             </ViewHolder>

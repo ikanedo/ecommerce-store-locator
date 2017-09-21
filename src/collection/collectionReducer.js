@@ -4,18 +4,14 @@ const initialState = {
   view: CONST.LIST_VIEW,
   errorMsg: undefined,
   locations: [],
-  closestStore: {},
   isLoading: false,
   postcode: '',
   activeMapLocation: {
-    distance: null,
+    uid: '',
     name: '',
-    type: '',
-    address: '',
-    geoPoint: {
-      latitude: 0,
-      longitude: 0
-    }
+    addressLine1: '',
+    latitude: 0,
+    longitude: 0
   }
 };
 
@@ -36,11 +32,6 @@ export default function collection(state = initialState, action) {
         ...state,
         locations: action.locations,
         errorMsg: undefined
-      };
-    case CONST.SET_CLOSEST_STORE:
-      return {
-        ...state,
-        closestStore: action.closestStore
       };
     case CONST.SET_ACTIVE_MAP_LOCATION:
       return {

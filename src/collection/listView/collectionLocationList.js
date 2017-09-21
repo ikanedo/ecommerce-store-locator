@@ -16,11 +16,10 @@ export default function CollectionLocationList(props) {
             location =>
               <CollectionLocation
                 name="collection-location"
-                checked={ location.id === activeLocation.id }
-                key={ `${location.name}${location.id}` }
+                checked={ location.uid === activeLocation.uid }
+                key={ `${location.name}${location.uid}` }
                 handleLocationClick={ handleLocationClick }
                 location={ location }
-                deliveryModeCode={ activeLocation.type }
               />
           )
         }

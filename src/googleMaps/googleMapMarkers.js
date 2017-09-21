@@ -28,15 +28,17 @@ export default class GoogleMapMarkers {
   getSetMarkers(locations, activeMapLocation, handleMarkerClick) {
     return locations.map((location, index) => {
       const marker = this.getSetMarker(
-        utils.getGoogleLatLng(location.geoPoint),
-        this.getMarkerURL(location, activeMapLocation, location.type)
+        utils.getGoogleLatLng({
+          latitude: location.latitude,
+          longitude: location.longitude
+        }),
+        this.getMarkerURL(location, activeMapLocation)
       );
 
-      marker.addListener('click', () => handleMarkerClick(location, location.type));
-      marker.set('id', location.id);
-      marker.set('type', location.type);
+      marker.addListener('click', () => handleMarkerClick(location));
+      marker.set('uid', location.uid);
       marker.set('labelIndex', index);
-      marker.set('active', location.id === activeMapLocation.id);
+      marker.set('active', location.uid === activeMapLocation.uid);
       return marker;
     });
   }
@@ -70,7 +72,7 @@ export default class GoogleMapMarkers {
     } : '';
   }
 
-  getMarkerURL(current, active, type) {
+  getMarkerURL(current, active = {}) {
     let size = 'LARGE';
     if (this.isSmallMarkers()) {
       size = 'SMALL';
@@ -80,19 +82,27 @@ export default class GoogleMapMarkers {
       size = 'XLARGE';
     }
 
-    const markerKey = `GOOGLE_PIN_${type.toUpperCase()}_${size}`;
+    const markerKey = `GOOGLE_PIN_${size}`;
     const markerActiveKey = `${markerKey}_ACTIVE`;
 
-    return current.id === active.id
+    if (!active || !current) {
+      debugger;
+    }
+
+    return current.uid === active.uid
       ? CONST[markerActiveKey]
       : CONST[markerKey];
   }
 
-  setMarkersIconAndLabel(markers, activeMarker) {
+  setMarkersIconAndLabel(markers = [], activeMarker = {}) {
     markers.forEach(marker => {
-      marker.setIcon(this.getMarkerURL(marker, activeMarker, marker.type));
+      if (!marker) {
+        return;
+      }
+
+      marker.setIcon(this.getMarkerURL(marker, activeMarker));
       // marker.setLabel(this.getMarkerLabel(marker));
-      marker.set('active', marker.id === activeMarker.id);
+      marker.set('active', marker.uid === activeMarker.uid);
     });
   }
 
@@ -103,10 +113,10 @@ export default class GoogleMapMarkers {
     ));
   }
 
-  toggleActiveMarker(activeMapLocation) {
+  toggleActiveMarker(activeMapLocation = {}) {
     const currentActiveMarker = this.getActiveMarker();
     const nextActiveMarker = this.getMarkers().filter(
-      marker => marker.id === activeMapLocation.id
+      marker => marker.uid === activeMapLocation.uid
     )[0];
 
     this.setMarkersIconAndLabel(
