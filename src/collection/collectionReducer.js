@@ -1,16 +1,12 @@
 import * as CONST from './collectionConstants';
-import { isTrue } from 'src/utils/utils';
 
 const initialState = {
-  pageNumber: 1,
   view: CONST.LIST_VIEW,
   errorMsg: undefined,
   locations: [],
   closestStore: {},
   isLoading: false,
   postcode: '',
-  includeRlc: true,
-  includeDts: true,
   activeMapLocation: {
     distance: null,
     name: '',
@@ -25,11 +21,6 @@ const initialState = {
 
 export default function collection(state = initialState, action) {
   switch (action.type) {
-    case CONST.SET_COLLECTION_LIST_PAGE_NUMBER:
-      return {
-        ...state,
-        pageNumber: action.pageNumber
-      };
     case CONST.SET_COLLECTION_LOADING:
       return {
         ...state,
@@ -38,9 +29,7 @@ export default function collection(state = initialState, action) {
     case CONST.SET_COLLECTION_FILTERS:
       return {
         ...state,
-        postcode: action.postcode,
-        includeDts: isTrue(action.includeDts),
-        includeRlc: isTrue(action.includeRlc)
+        postcode: action.postcode
       };
     case CONST.SET_COLLECTION_LOCATIONS:
       return {

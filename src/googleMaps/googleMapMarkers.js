@@ -1,7 +1,5 @@
-import google from 'google';
 import * as CONST from './googleMapConstants';
 import * as utils from './googleMapUtils';
-import find from 'lodash/find';
 
 /*
   location: shape({
@@ -44,7 +42,7 @@ export default class GoogleMapMarkers {
   }
 
   getSetMarker(latlng, imageUrl) {
-    return new google.maps.Marker({
+    return new window.google.maps.Marker({
       map: this.map,
       position: latlng,
       icon: imageUrl
@@ -52,7 +50,7 @@ export default class GoogleMapMarkers {
   }
 
   getActiveMarker() {
-    return find(this.markers, marker => marker.active);
+    return this.markers.filter(marker => marker.active)[0];
   }
 
   isSmallMarkers() {
@@ -93,7 +91,7 @@ export default class GoogleMapMarkers {
   setMarkersIconAndLabel(markers, activeMarker) {
     markers.forEach(marker => {
       marker.setIcon(this.getMarkerURL(marker, activeMarker, marker.type));
-      marker.setLabel(this.getMarkerLabel(marker));
+      // marker.setLabel(this.getMarkerLabel(marker));
       marker.set('active', marker.id === activeMarker.id);
     });
   }
@@ -107,10 +105,9 @@ export default class GoogleMapMarkers {
 
   toggleActiveMarker(activeMapLocation) {
     const currentActiveMarker = this.getActiveMarker();
-    const nextActiveMarker = find(
-      this.getMarkers(),
+    const nextActiveMarker = this.getMarkers().filter(
       marker => marker.id === activeMapLocation.id
-    );
+    )[0];
 
     this.setMarkersIconAndLabel(
       [currentActiveMarker, nextActiveMarker],

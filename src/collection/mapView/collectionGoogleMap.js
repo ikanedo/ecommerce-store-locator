@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import isEmpty from 'lodash/isEmpty';
-import google from 'google';
-import * as utils from 'src/googleMaps/googleMapUtils';
-import GoogleMapMarkers from 'src/googleMaps/googleMapMarkers';
+import * as utils from '../../googleMaps/googleMapUtils';
+import GoogleMapMarkers from '../../googleMaps/googleMapMarkers';
 
 export class CollectionGoogleMapRenderer {
   constructor({ id, postcode, locations, activeMapLocation, handleMarkerClick }) {
     return utils.createResponsiveMap(id, postcode).then(map => {
-      const hasCurrectActiveLocation = locations.some(location => location.id === activeMapLocation.id);
+      const hasCurrectActiveLocation =
+        locations.some(location => location.id === activeMapLocation.id);
       this.map = map;
       this.markers = new GoogleMapMarkers(map, 12, 13);
       this.markers.setMarkers(
@@ -46,7 +46,7 @@ export default class CollectionGoogleMap extends Component {
 
     if (hasSwitchedFromListToMap) {
       this.locationsMap.then(({ map }) => {
-        google.maps.event.trigger(map, 'recenter');
+        window.google.maps.event.trigger(map, 'recenter');
       });
     }
 
@@ -64,17 +64,12 @@ export default class CollectionGoogleMap extends Component {
 
   hasSearchChanged(nextProps) {
     const {
-      includeDts,
-      includeRlc,
       postcode
     } = this.props;
 
     const hasPostcodeChanged = postcode !== nextProps.postcode;
-    const hasFiltersChanged =
-      (includeDts !== nextProps.includeDts)
-      || (includeRlc !== nextProps.includeRlc);
 
-    return hasPostcodeChanged || hasFiltersChanged;
+    return hasPostcodeChanged;
   }
 
   render() {
@@ -101,12 +96,12 @@ export default class CollectionGoogleMap extends Component {
 
 CollectionGoogleMap.propTypes = {
   activeMapLocation: PropTypes.shape({
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    distance: PropTypes.number
   }),
   locations: PropTypes.array.isRequired,
   postcode: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  isVisible: PropTypes.bool.isRequired,
-  includeRlc: PropTypes.bool.isRequired,
-  includeDts: PropTypes.bool.isRequired
+  isVisible: PropTypes.bool.isRequired
 };
