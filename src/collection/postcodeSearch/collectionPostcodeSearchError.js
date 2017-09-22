@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function CollectionPostcodeSearchError({ msg }) {
   if (!msg) {
@@ -6,7 +7,7 @@ export default function CollectionPostcodeSearchError({ msg }) {
   }
 
   return (
-    <div className="collection-search__error">{ msg }</div>
+    <div className="collection-search__error">{msg}</div>
   );
 }
 

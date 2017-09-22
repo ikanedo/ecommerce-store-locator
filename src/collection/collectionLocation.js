@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { SelectablePanel } from '../panels/panels';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function CollectionLocation(props) {
   const {
@@ -12,7 +12,12 @@ export default function CollectionLocation(props) {
 
   const {
     addressLine1,
-    uid
+    telephone,
+    postcodeAfter,
+    city,
+    uid,
+    deliveryMode,
+    regularOpeningTime
   } = location;
 
   if (uid === '') {
@@ -20,19 +25,45 @@ export default function CollectionLocation(props) {
   }
 
   return (
-    <SelectablePanel
-      className={className}
-      handleChange={() => handleLocationClick(location)}
-      title={ location.name }
-      name={ name }
-      value={ location.name }
-      {...inputProps}
-    >
-      <div className="collection-panel">
-        <p className="collection-panel__address">{ addressLine1 }</p>
-        <p>TODO - opening hours</p>
-      </div>
-    </SelectablePanel>
+    <div className={`collection-card ${className || ''}`}>
+      <input
+        className="collection-card__input"
+        type="radio"
+        name={name}
+        value={location.name}
+        onChange={() => handleLocationClick(location)}
+        id={uid}
+        {...inputProps}
+      />
+      <label className="collection-card__card" htmlFor={uid}>
+        <div className="collection-card__l">
+          <div className="collection-card__header">
+            <h4 className="collection-card__title">{location.name}</h4>
+            <p className="collection-card__address">{addressLine1}, {city}</p>
+            <p className="collection-card__address">{postcodeAfter}</p>
+            <p className="collection-card__address">{telephone}</p>
+          </div>
+          <div className="collection-card__content">
+            <table className="collection-card__opening">
+              <tbody>
+                {
+                  regularOpeningTime.map(day =>
+                    <tr>
+                      <td>{day.title}</td>
+                      <td>{day.openingHours}</td>
+                    </tr>
+                  )
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="collection-card__r">
+          <strong>Availability</strong>
+          <p className="collection-card__availability">{deliveryMode.leadTime}</p>
+        </div>
+      </label>
+    </div>
   );
 }
 
@@ -41,10 +72,14 @@ CollectionLocation.propTypes = {
   location: PropTypes.shape({
     uid: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    city: PropTypes.string,
     addressLine1: PropTypes.string,
+    postcodeAfter: PropTypes.string,
+    telephone: PropTypes.string,
     deliveryMode: PropTypes.shape({
       leadTime: PropTypes.string.isRequired
-    })
+    }),
+    regularOpeningTime: PropTypes.object.isRequired
   }).isRequired,
   name: PropTypes.string.isRequired,
   className: PropTypes.string

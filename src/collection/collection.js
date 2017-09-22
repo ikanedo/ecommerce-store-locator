@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash/isEmpty';
 import * as CONST from './collectionConstants';
@@ -18,6 +19,7 @@ export class Collection extends Component {
   constructor() {
     super();
     this.handlePostcodeSearch = this.handlePostcodeSearch.bind(this);
+    this.handleCollectFromLocation = this.handleCollectFromLocation.bind(this);
   }
 
   handlePostcodeSearch(geolocation) {
@@ -30,6 +32,10 @@ export class Collection extends Component {
     } = this.props;
     setCollectionView(view || CONST.LIST_VIEW);
     findCollectionPoint(endpointUrl, endpointParams, geolocation);
+  }
+
+  handleCollectFromLocation() { // eslint-disable-line
+    window.alert('Fire an action here to set Redux state'); // eslint-disable-line
   }
 
   render() {
@@ -46,47 +52,44 @@ export class Collection extends Component {
     } = this.props;
 
     return (
-      <div>
-        <section className="delivery-section">
-          <PostcodeSearch>
-            <PostcodeSearchForm
-              name={ name }
-              handleResults={ this.handlePostcodeSearch }
-              isLoading={ isLoading }
+      <div className="collection-app">
+        <PostcodeSearch>
+          <PostcodeSearchForm
+            name={name}
+            handleResults={this.handlePostcodeSearch}
+            isLoading={isLoading}
+          />
+          <PostcodeSearchError msg={errorMsg} />
+        </PostcodeSearch>
+        <CollectionResults hasResults={!isEmpty(locations)}>
+          <ViewHolder type={CONST.MAP_VIEW} activeType={view}>
+            <GoogleMap
+              isVisible={CONST.MAP_VIEW === view}
+              id="collection-map"
+              activeMapLocation={activeMapLocation}
+              postcode={postcode}
+              locations={locations}
+              handleMarkerClick={setActiveMapLocation}
             />
-            <PostcodeSearchError msg={ errorMsg } />
-          </PostcodeSearch>
-        </section>
-        <CollectionResults hasResults={ !isEmpty(locations) }>
-          <section className="delivery-section">
-            <FilterBar hasLocations={ !isEmpty(locations) }>
-              <ViewChange name={ name } onChange={ setCollectionView } activeType={ view } />
-            </FilterBar>
-            <ViewHolder type={ CONST.MAP_VIEW } activeType={ view }>
-              <GoogleMap
-                isVisible={ CONST.MAP_VIEW === view }
-                id="collection-map"
-                activeMapLocation={ activeMapLocation }
-                postcode={ postcode }
-                locations={ locations }
-                handleMarkerClick={ setActiveMapLocation }
-              />
-              <CollectionLocation
-                checked
-                name="selected-collection"
-                className="collection-map__active-location"
-                location={ activeMapLocation }
-                handleLocationClick={ setActiveMapLocation }
-              />
-            </ViewHolder>
-            <ViewHolder type={ CONST.LIST_VIEW } activeType={ view }>
-              <CollectionLocationList
-                handleLocationClick={ setActiveMapLocation }
-                activeLocation={ activeMapLocation }
-                locations={ locations }
-              />
-            </ViewHolder>
-          </section>
+            <CollectionLocation
+              checked
+              name="selected-collection"
+              className="collection-map__active-location"
+              location={activeMapLocation}
+              handleLocationClick={setActiveMapLocation}
+            />
+          </ViewHolder>
+          <ViewHolder type={CONST.LIST_VIEW} activeType={view}>
+            <CollectionLocationList
+              handleLocationClick={setActiveMapLocation}
+              activeLocation={activeMapLocation}
+              locations={locations}
+            />
+          </ViewHolder>
+          <FilterBar hasLocations={!isEmpty(locations)}>
+            <button onClick={this.handleCollectFromLocation} className="button collection-filter__primary">Select store</button>
+            <ViewChange name={name} onChange={setCollectionView} activeType={view} />
+          </FilterBar>
         </CollectionResults>
       </div>
     );

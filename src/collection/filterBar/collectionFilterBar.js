@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function CollectionFilterBar({ children, hasLocations }) {
   if (!hasLocations) {
@@ -7,9 +8,7 @@ export default function CollectionFilterBar({ children, hasLocations }) {
 
   return (
     <div className="collection-filter">
-      <div className="collection-filter__inner">
-        { children }
-      </div>
+      {children}
     </div>
   );
 }

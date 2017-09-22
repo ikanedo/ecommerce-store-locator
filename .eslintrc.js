@@ -22,13 +22,10 @@ module.exports = {
     "react/sort-comp": 0,
     "react/no-multi-comp": 0,
     "react/require-extension": 0,
-    "react/jsx-curly-spacing": 0,
     "no-console": 0,
     "arrow-parens": 0,
     "react/require-default-props": 0,
-    "react/self-closing-comp": 0,
     "react/forbid-prop-types": 0,
-    "jsx-a11y/label-has-for": 0,
     "no-debugger": 0
   }
 };

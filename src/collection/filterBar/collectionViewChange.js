@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as CONST from '../collectionConstants';
 
@@ -13,39 +14,43 @@ export class CollectionViewChange extends Component {
   }
 
   render() {
+    const {
+      activeType
+    } = this.props;
+    const isListView = activeType === CONST.LIST_VIEW;
+    const isMapView = activeType === CONST.MAP_VIEW;
+
     return (
-      <ul className="collection-filter__views">
-        <li className="collection-filter__view-type">
-          <label htmlFor="listView">
+      <div className="collection-filter__views">
+        {
+          !isListView &&
+          <label className="button collection-filter__btn" htmlFor="listView">
             <input
-              onChange={ this.handleChangeView }
-              checked={ this.props.activeType === CONST.LIST_VIEW }
+              onChange={this.handleChangeView}
+              checked={activeType === CONST.LIST_VIEW}
               type="radio"
               id="listView"
-              value={ CONST.LIST_VIEW }
+              value={CONST.LIST_VIEW}
               name="collectionFilter"
             />
-            <span className="collection-filter__view-name">
-              List view
-            </span>
+            View list of stores
           </label>
-        </li>
-        <li className="collection-filter__view-type">
-          <label htmlFor="mapView">
+        }
+        {
+          !isMapView &&
+          <label className="button collection-filter__btn" htmlFor="mapView">
             <input
-              onChange={ this.handleChangeView }
-              checked={ this.props.activeType === CONST.MAP_VIEW }
+              onChange={this.handleChangeView}
+              checked={activeType === CONST.MAP_VIEW}
               type="radio"
               id="mapView"
-              value={ CONST.MAP_VIEW }
+              value={CONST.MAP_VIEW}
               name="collectionFilter"
             />
-            <span className="collection-filter__view-name">
-              Map view
-            </span>
+            View stores on map
           </label>
-        </li>
-      </ul>
+        }
+      </div>
     );
   }
 }

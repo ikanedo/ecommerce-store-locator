@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, FormError } from 'react-redux-simple-validate';
 
 export default class CollectionPostcodeSearchForm extends Component {
@@ -69,36 +70,33 @@ export default class CollectionPostcodeSearchForm extends Component {
 
     return (
       <div className="collection-search">
+        <h4>Collect in store</h4>
         <Form
           formName={this.formName}
           handleValidForm={(data) => handleResults(data.postcode)}
           validation={this.validation}
         >
-          <div className="form-input">
-            <div className="form-input">
-              <input className="form-input__input" type="text" name="postcode" value="" id="collection-postcode" />
-              <label className="form-input__label" htmlFor="collection-postcode">Search stores by postcode</label>
-            </div>
+          <label htmlFor="collection-postcode">Search stores by postcode</label>
+          <div className="collection-search__input">
+            <input type="text" name="postcode" value="" id="collection-postcode" />
             <FormError forInput="postcode" />
+            <button
+              className={`collection-search__icon icon-magnifying-glass ${isLoading ? '_is-loading' : ''}`}
+              disabled={isLoading}
+            >
+              Search
+            </button>
           </div>
-          <button
-            className={`button button--tertiary collection-search__btn ${isLoading ? '_is-loading' : ''}`}
-            disabled={isLoading}
-          >
-            <span className="button__loader button__loader--tertiary"></span>
-            <span className="button__text">Search</span>
-          </button>
         </Form>
-        <hr />
         {
           isGeolocationAvailable &&
           <button
+            className="collection-search__btn--secondary"
             onClick={this.handleSetCurrentLocation}
-            className="button secondary"
             disabled={!hasGeolocation}
             title={geolocationError}
           >
-            {isLoadingLocation ? 'loading' : 'Use current location'}
+            {isLoadingLocation ? 'Finding stores near you' : 'Use current location'}
           </button>
         }
         {geolocation.latitude ? `${geolocation.latitude},${geolocation.longitude}` : ''}

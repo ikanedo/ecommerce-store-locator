@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import CollectionLocation from '../collectionLocation';
 
 export default function CollectionLocationList(props) {
@@ -16,10 +17,10 @@ export default function CollectionLocationList(props) {
             location =>
               <CollectionLocation
                 name="collection-location"
-                checked={ location.uid === activeLocation.uid }
-                key={ `${location.name}${location.uid}` }
-                handleLocationClick={ handleLocationClick }
-                location={ location }
+                checked={location.uid === activeLocation.uid}
+                key={`${location.name}${location.uid}`}
+                handleLocationClick={handleLocationClick}
+                location={location}
               />
           )
         }

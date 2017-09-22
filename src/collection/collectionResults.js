@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function CollectionResults({ hasResults, children }) {
   if (!hasResults) {
@@ -7,7 +8,7 @@ export default function CollectionResults({ hasResults, children }) {
 
   return (
     <div id="collection-results" className="collection-view__results">
-      { children }
+      {children}
     </div>
   );
 }

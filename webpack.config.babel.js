@@ -48,11 +48,35 @@ const common = {
             limit: 10000
           }
         }
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+                minimize: false
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
+          ]
+        })
       }
     ]
   },
   plugins: [
-    new SystemBellPlugin()
+    new SystemBellPlugin(),
+    new ExtractTextPlugin({
+      ignoreOrder: true,
+      filename: 'store-locator.css'
+    })
   ]
 };
 

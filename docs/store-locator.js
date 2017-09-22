@@ -7,6 +7,8 @@ import { FormReducer as Forms } from 'react-redux-simple-validate';
 import CollectionApp from '../src/collection/collection';
 import Collection from '../src/collection/collectionReducer';
 
+import './store-locator.scss';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   combineReducers({
@@ -53,7 +55,7 @@ export default class StoreLocator extends Component {
     }
 
     return (
-      <Provider store={ store }>
+      <Provider store={store}>
         <CollectionApp
           name="Collection"
         />

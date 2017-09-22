@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function CollectionViewHolder({ activeType, children, type }) {
   return (
-    <div className={ `collection-view__${type.toLowerCase()} ${activeType !== type ? '_is-hidden' : ''}` }>
-      { children }
+    <div className={`collection-view__${type.toLowerCase()} ${activeType !== type ? '_is-hidden' : ''}`}>
+      {children}
     </div>
   );
 }

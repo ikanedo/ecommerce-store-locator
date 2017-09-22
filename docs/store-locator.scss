@@ -1,0 +1,172 @@
+@mixin collection-secondary-btn {
+  background: #fff;
+  color: #000;
+  max-width: 100%;
+
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
+}
+
+.collection-app {
+  background: #fff;
+  padding: 20px;
+}
+
+.collection-view {
+  &__map-view {
+    position: relative;
+  }
+}
+
+.collection-map {
+
+  &__map {
+    width: 100%;
+    min-height: 500px;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__active-location {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    background: #fff;
+    bottom: 0;
+
+    .collection-card__opening tr:not(:first-child),
+    .collection-card__address {
+      display: none !important;
+    }
+  }
+}
+
+.collection-search {
+  label {
+    font-weight: bold;
+  }
+
+  &__input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+
+    input[type="text"] {
+      max-width: none
+    }
+  }
+
+  &__btn--secondary {
+    @include collection-secondary-btn;
+  }
+
+  &__icon {
+    background: red;
+    display: inline-block;
+    text-indent: 100%;
+    color: #000;
+    border: 0 none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    width: 30px;
+    height: 40px;
+    overflow: hidden;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+
+    &:hover {
+      color: #000;
+      background: transparent;
+    }
+  }
+}
+
+.collection-filter {
+  input {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  &__primary.button {
+    max-width: none;
+  }
+
+  &__btn.button {
+    @include collection-secondary-btn;
+  }
+}
+
+.collection-card {
+  p {
+    margin-bottom: 0;
+  }
+
+  table {
+    border: 0 none;
+    margin: 0;
+
+    tbody tr td {
+      border: 0 none;
+      padding: 0 0 5px;
+    }
+  }
+
+  &__l {
+    float: left;
+    width: 80%;
+  }
+
+  &__r {
+    text-align: right;
+  }
+
+  &__header {
+    margin-bottom: 10px;
+  }
+
+  &__input {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  &__input + &__card,
+  &__card {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    margin: 0 0 5px;
+    width: 100%;
+    padding: 20px 28px;
+  }
+
+  &__input:checked + &__card {
+    border: 2px solid #000;
+
+    .collection-card__opening tr {
+      display: table-row;
+    }
+
+    .collection-card__address {
+      display: block;
+    }
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: Avenir, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+  }
+
+  &__opening tr:not(:first-child),
+  &__address {
+    display: none;
+  }
+
+  &__availability {
+    color: #00c412;
+  }
+}
