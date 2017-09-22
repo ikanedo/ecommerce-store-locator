@@ -28,7 +28,7 @@ export default function collection(state = initialState, action) {
       };
     case CONST.SET_SELECTED_STORE:
       return {
-        ...state,
+        ...initialState,
         selectedStore: action.selectedStore
       };
     case CONST.SET_COLLECTION_CONFIG:
