@@ -54,6 +54,7 @@ export function createResponsiveMap(id, postcode) {
     map.mapTypes.set('grey', mapType);
     map.setMapTypeId('grey');
 
-    return setCenterOnResize(map, latlng);
+    // return setCenterOnResize(map, latlng);
+    return map;
   });
 }

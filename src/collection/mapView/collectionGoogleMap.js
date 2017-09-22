@@ -22,7 +22,8 @@ export class CollectionGoogleMapRenderer {
         bound.extend(marker.getPosition())
       );
       this.markers.changeMarkersOnZoom();
-      map.fitBounds(bound);
+      this.map.fitBounds(bound);
+      utils.setCenterOnResize(map, bound.getCenter());
       return this;
     });
   }
