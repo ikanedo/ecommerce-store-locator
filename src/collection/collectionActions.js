@@ -85,7 +85,7 @@ export function findCollectionPoint(url, params, geolocation) {
       .then(response => {
         if (isEmpty(response.stores)) {
           dispatch(resetCollectionState());
-          dispatch(setCollectionErrorMsg('We couldn\'t find stores near you. View all stores with stock or enter another location.'));
+          dispatch(setCollectionErrorMsg(`We couldn't find stores near ${geolocation}. View all stores with stock or enter another location.`));
           return response;
         }
 

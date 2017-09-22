@@ -9,6 +9,20 @@
   }
 }
 
+@mixin collection-link {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  width: auto;
+  background: transparent;
+  color: #000;
+  letter-spacing: normal;
+  text-transform: none;
+  font-size: 14px;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
 .form-msg-error {
   color: red;
   margin-top: -15px;
@@ -103,12 +117,16 @@
     }
   }
 
+  &__error,
   &__msg {
     background-color: #f2f2f2;
     padding: 30px;
     z-index: 10;
     width: 100%;
     margin-bottom: 20px;
+  }
+
+  &__msg {
     text-align: right;
 
     > p {
@@ -120,17 +138,12 @@
   }
 
   &__change {
-    margin: 0;
-    border: 0;
-    padding: 0;
-    width: auto;
-    background: transparent;
-    color: #000;
-    letter-spacing: normal;
-    text-transform: none;
-    font-size: 14px;
-    font-weight: normal;
-    text-decoration: underline;
+    @include collection-link;
+  }
+
+  &__all-stock {
+    max-width: none;
+    margin-bottom: 15px;
   }
 }
 
@@ -162,6 +175,10 @@
       border: 0 none;
       padding: 0 0 5px;
     }
+  }
+
+  &__link {
+    @include collection-link
   }
 
   &__l {
@@ -199,6 +216,11 @@
 
     .collection-card__address {
       display: block;
+    }
+
+
+    .collection-card__link {
+      display: none;
     }
   }
 

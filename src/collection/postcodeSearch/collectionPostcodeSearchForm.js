@@ -57,7 +57,8 @@ export default class CollectionPostcodeSearchForm extends Component {
   render() {
     const {
       handleResults,
-      isLoading
+      isLoading,
+      errorMsg
     } = this.props;
 
     const {
@@ -67,6 +68,10 @@ export default class CollectionPostcodeSearchForm extends Component {
       geolocationError,
       geolocation
     } = this.state;
+
+    if (errorMsg) {
+      return null;
+    }
 
     return (
       <div className="collection-search">
@@ -107,6 +112,7 @@ export default class CollectionPostcodeSearchForm extends Component {
 
 CollectionPostcodeSearchForm.propTypes = {
   name: PropTypes.string.isRequired,
+  errorMsg: PropTypes.string,
   handleResults: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired
 };

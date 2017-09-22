@@ -56,6 +56,7 @@ export default function CollectionLocation(props) {
                 }
               </tbody>
             </table>
+            <button className="collection-card__link">Opening hours</button>
           </div>
         </div>
         <div className="collection-card__r">

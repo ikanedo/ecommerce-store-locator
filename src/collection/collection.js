@@ -58,7 +58,8 @@ export class Collection extends Component {
       setCollectionView,
       setActiveMapLocation,
       isLoading,
-      isChangeStore
+      isChangeStore,
+      resetCollectionState
     } = this.props;
 
     const hasLocations = locations.length > 0;
@@ -76,8 +77,9 @@ export class Collection extends Component {
             name={name}
             handleResults={this.handlePostcodeSearch}
             isLoading={isLoading}
+            errorMsg={errorMsg}
           />
-          <PostcodeSearchError msg={errorMsg} />
+          <PostcodeSearchError msg={errorMsg} handleSearchAgain={resetCollectionState} />
         </PostcodeSearch>
         <CollectionResults hasResults={hasLocations}>
           <ViewHolder type={CONST.MAP_VIEW} activeType={view}>
@@ -129,6 +131,7 @@ Collection.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   setSelectedStore: PropTypes.func.isRequired,
   setChangeStore: PropTypes.func.isRequired,
+  resetCollectionState: PropTypes.func.isRequired,
   isChangeStore: PropTypes.bool.isRequired
 };
 
