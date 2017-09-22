@@ -61,6 +61,13 @@ export function setCollectionErrorMsg(errorMsg) {
   };
 }
 
+export function setSelectedStore(selectedStore) {
+  return {
+    type: CONST.SET_SELECTED_STORE,
+    selectedStore
+  };
+}
+
 export function findCollectionPoint(url, params, geolocation) {
   return dispatch => {
     dispatch(setCollectionLoading(true));

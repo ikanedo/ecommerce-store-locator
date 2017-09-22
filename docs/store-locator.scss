@@ -9,6 +9,13 @@
   }
 }
 
+.form-msg-error {
+  color: red;
+  margin-top: -15px;
+  display: block;
+  margin-bottom: 15px;
+}
+
 .collection-app {
   background: #fff;
   padding: 20px;
@@ -56,7 +63,12 @@
     width: 100%;
 
     input[type="text"] {
-      max-width: none
+      max-width: none;
+      background-color: #fff;
+    }
+
+    &._is-error {
+      border-color: red;
     }
   }
 

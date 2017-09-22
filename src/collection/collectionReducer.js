@@ -14,11 +14,17 @@ const initialState = {
     addressLine1: '',
     latitude: 0,
     longitude: 0
-  }
+  },
+  selectedStore: null
 };
 
 export default function collection(state = initialState, action) {
   switch (action.type) {
+    case CONST.SET_SELECTED_STORE:
+      return {
+        ...state,
+        selectedStore: action.selectedStore
+      };
     case CONST.SET_COLLECTION_CONFIG:
       return {
         ...state,

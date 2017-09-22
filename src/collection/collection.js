@@ -34,8 +34,13 @@ export class Collection extends Component {
     findCollectionPoint(endpointUrl, endpointParams, geolocation);
   }
 
-  handleCollectFromLocation() { // eslint-disable-line
-    window.alert('Fire an action here to set Redux state'); // eslint-disable-line
+  handleCollectFromLocation() {
+    const {
+      activeMapLocation,
+      setSelectedStore
+    } = this.props;
+
+    setSelectedStore(activeMapLocation);
   }
 
   render() {
@@ -87,7 +92,7 @@ export class Collection extends Component {
             />
           </ViewHolder>
           <FilterBar hasLocations={!isEmpty(locations)}>
-            <button onClick={this.handleCollectFromLocation} className="button collection-filter__primary">Select store</button>
+            <button disabled={activeMapLocation.uid === ''} onClick={this.handleCollectFromLocation} className="button collection-filter__primary">Select store</button>
             <ViewChange name={name} onChange={setCollectionView} activeType={view} />
           </FilterBar>
         </CollectionResults>
@@ -108,7 +113,8 @@ Collection.propTypes = {
   findCollectionPoint: PropTypes.func.isRequired,
   setCollectionView: PropTypes.func.isRequired,
   setActiveMapLocation: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  setSelectedStore: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
