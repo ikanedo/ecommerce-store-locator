@@ -106,11 +106,10 @@ export default class GoogleMapMarkers {
     });
   }
 
-  setCurrentLocationMarker(postcode, imageURL = CONST.GOOGLE_PIN_POSTCODE) {
-    utils.getGeocode(postcode).then(latlng => this.getSetMarker(
-      latlng,
-      imageURL
-    ));
+  setCurrentLocationMarker(postcode, bound, imageURL = CONST.GOOGLE_PIN_POSTCODE) {
+    return utils.getGeocode(postcode).then(latlng =>
+      this.getSetMarker(latlng, imageURL)
+    );
   }
 
   toggleActiveMarker(activeMapLocation = {}) {

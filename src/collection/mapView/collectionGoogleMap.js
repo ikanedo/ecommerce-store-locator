@@ -14,8 +14,15 @@ export class CollectionGoogleMapRenderer {
         activeMapLocation,
         handleMarkerClick
       );
-      this.markers.setCurrentLocationMarker(postcode);
+      const bound = new window.google.maps.LatLngBounds();
+      this.markers.setCurrentLocationMarker(postcode).then(marker =>
+        bound.extend(marker.getPosition())
+      );
+      this.markers.getMarkers().forEach(marker =>
+        bound.extend(marker.getPosition())
+      );
       this.markers.changeMarkersOnZoom();
+      map.fitBounds(bound);
       return this;
     });
   }
