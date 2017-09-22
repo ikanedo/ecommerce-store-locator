@@ -1,3 +1,5 @@
+import { MAP_STYLE } from './googleMapConstants';
+
 export function getGoogleLatLng({ latitude, longitude }) {
   return new window.google.maps.LatLng(latitude, longitude);
 }
@@ -45,6 +47,12 @@ export function createResponsiveMap(id, postcode) {
       mapTypeId: window.google.maps.MapTypeId.ROADMAP,
       center: latlng
     });
+
+    const mapType = new window.google.maps.StyledMapType(MAP_STYLE, {
+      name: 'Grayscale'
+    });
+    map.mapTypes.set('grey', mapType);
+    map.setMapTypeId('grey');
 
     return setCenterOnResize(map, latlng);
   });

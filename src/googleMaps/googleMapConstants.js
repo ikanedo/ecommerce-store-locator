@@ -1,8 +1,10 @@
-/* eslint-disable max-len */
-export const GOOGLE_PIN_LARGE = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-export const GOOGLE_PIN_LARGE_ACTIVE = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
-export const GOOGLE_PIN_XLARGE = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-export const GOOGLE_PIN_XLARGE_ACTIVE = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
-export const GOOGLE_PIN_SMALL = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-export const GOOGLE_PIN_SMALL_ACTIVE = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png';
+export const GOOGLE_PIN_LARGE = '/src/googleMaps/black_pin.png';
+export const GOOGLE_PIN_LARGE_ACTIVE = '/src/googleMaps/black_pin_selected.png';
+export const GOOGLE_PIN_XLARGE = '/src/googleMaps/black_pin.png';
+export const GOOGLE_PIN_XLARGE_ACTIVE = '/src/googleMaps/black_pin_selected.png';
+export const GOOGLE_PIN_SMALL = '/src/googleMaps/black_pin.png';
+export const GOOGLE_PIN_SMALL_ACTIVE = '/src/googleMaps/black_pin_selected.png';
+export const GOOGLE_PIN_POSTCODE = '/src/googleMaps/grey_pin.png';
+/* eslint-disable*/
+export const MAP_STYLE = [{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#f2f2f2"}]},{"featureType":"transit","stylers":[{"color":"#808080"},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"color":"#c9c9c9"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"color":"#d7d7d7"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ebebeb"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#696969"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#737373"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"visibility":"off"},{"color":"#d6d6d6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#dadada"}]}];
 /* eslint-enable */
