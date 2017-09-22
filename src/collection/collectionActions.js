@@ -68,6 +68,13 @@ export function setSelectedStore(selectedStore) {
   };
 }
 
+export function setChangeStore(isChangeStore) {
+  return {
+    type: CONST.SET_CHANGE_STORE,
+    isChangeStore
+  };
+}
+
 export function findCollectionPoint(url, params, geolocation) {
   return dispatch => {
     dispatch(setCollectionLoading(true));
@@ -84,6 +91,7 @@ export function findCollectionPoint(url, params, geolocation) {
 
         dispatch(setCollectionLocations(response.stores));
         dispatch(setCollectionFilters(geolocation));
+        dispatch(setChangeStore(false));
         return response;
       }, () => {
         dispatch(setCollectionLoading(false));

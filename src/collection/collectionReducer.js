@@ -7,6 +7,7 @@ const initialState = {
   errorMsg: undefined,
   locations: [],
   isLoading: false,
+  isChangeStore: false,
   postcode: '',
   activeMapLocation: {
     uid: '',
@@ -20,6 +21,11 @@ const initialState = {
 
 export default function collection(state = initialState, action) {
   switch (action.type) {
+    case CONST.SET_CHANGE_STORE:
+      return {
+        ...state,
+        isChangeStore: action.isChangeStore
+      };
     case CONST.SET_SELECTED_STORE:
       return {
         ...state,

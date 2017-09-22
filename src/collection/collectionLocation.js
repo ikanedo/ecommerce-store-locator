@@ -48,7 +48,7 @@ export default function CollectionLocation(props) {
               <tbody>
                 {
                   regularOpeningTime.map(day =>
-                    <tr>
+                    <tr key={day.title.replace(/ /g, '-')}>
                       <td>{day.title}</td>
                       <td>{day.openingHours}</td>
                     </tr>
@@ -79,7 +79,7 @@ CollectionLocation.propTypes = {
     deliveryMode: PropTypes.shape({
       leadTime: PropTypes.string.isRequired
     }),
-    regularOpeningTime: PropTypes.object.isRequired
+    regularOpeningTime: PropTypes.array
   }).isRequired,
   name: PropTypes.string.isRequired,
   className: PropTypes.string

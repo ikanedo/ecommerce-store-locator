@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import isEmpty from 'lodash/isEmpty';
 import * as CONST from './collectionConstants';
 import * as CollectionActions from './collectionActions';
 import PostcodeSearch from './postcodeSearch/collectionPostcodeSearch';
@@ -20,6 +19,7 @@ export class Collection extends Component {
     super();
     this.handlePostcodeSearch = this.handlePostcodeSearch.bind(this);
     this.handleCollectFromLocation = this.handleCollectFromLocation.bind(this);
+    this.handleChangeStore = this.handleChangeStore.bind(this);
   }
 
   handlePostcodeSearch(geolocation) {
@@ -43,6 +43,10 @@ export class Collection extends Component {
     setSelectedStore(activeMapLocation);
   }
 
+  handleChangeStore() {
+    this.props.setChangeStore(true);
+  }
+
   render() {
     const {
       name,
@@ -53,12 +57,21 @@ export class Collection extends Component {
       activeMapLocation,
       setCollectionView,
       setActiveMapLocation,
-      isLoading
+      isLoading,
+      isChangeStore
     } = this.props;
+
+    const hasLocations = locations.length > 0;
 
     return (
       <div className="collection-app">
-        <PostcodeSearch>
+        <PostcodeSearch
+          postcode={postcode}
+          hasLocations={hasLocations}
+          locations={locations}
+          handleChangeStore={this.handleChangeStore}
+          isChangeStore={isChangeStore}
+        >
           <PostcodeSearchForm
             name={name}
             handleResults={this.handlePostcodeSearch}
@@ -66,7 +79,7 @@ export class Collection extends Component {
           />
           <PostcodeSearchError msg={errorMsg} />
         </PostcodeSearch>
-        <CollectionResults hasResults={!isEmpty(locations)}>
+        <CollectionResults hasResults={hasLocations}>
           <ViewHolder type={CONST.MAP_VIEW} activeType={view}>
             <GoogleMap
               isVisible={CONST.MAP_VIEW === view}
@@ -91,7 +104,7 @@ export class Collection extends Component {
               locations={locations}
             />
           </ViewHolder>
-          <FilterBar hasLocations={!isEmpty(locations)}>
+          <FilterBar hasLocations={hasLocations}>
             <button disabled={activeMapLocation.uid === ''} onClick={this.handleCollectFromLocation} className="button collection-filter__primary">Select store</button>
             <ViewChange name={name} onChange={setCollectionView} activeType={view} />
           </FilterBar>
@@ -114,7 +127,9 @@ Collection.propTypes = {
   setCollectionView: PropTypes.func.isRequired,
   setActiveMapLocation: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  setSelectedStore: PropTypes.func.isRequired
+  setSelectedStore: PropTypes.func.isRequired,
+  setChangeStore: PropTypes.func.isRequired,
+  isChangeStore: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
