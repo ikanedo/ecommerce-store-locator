@@ -1,5 +1,9 @@
-// this should be the entry point to your library
-module.exports = {
-  collection: require('./collection/collection').default
-};
+import Collection from './collection/collection'; //eslint-disable-line
+import CollectionReducer from './collection/collectionReducer';
+import CollectionActions from './collection/collectionActions';
 
+export {
+  Collection,
+  CollectionReducer,
+  CollectionActions
+};
